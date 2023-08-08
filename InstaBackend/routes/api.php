@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 
 //Authenticated APIS
@@ -16,6 +18,11 @@ Route::group(["middleware" => "auth:api"], function(){
     Route::group(["prefix" => "user"], function(){
         Route::post("logout", [AuthController::class, "logout"]);
         Route::post("refresh", [AuthController::class, "refresh"]);
+        Route::get('following-pictures', [UserController::class,"followingPictures"]);
+        Route::get('search-users',[UserController::class,"searchUsers"]);
+        Route::post('follow-user/{user}', [UserController::class,"followUser"]);
+        Route::delete('unfollow-user/{user}', [UserController::class,"unfollowUser"]);
+        Route::post('create-post', [PostController::class , "createPost"]);
     });
 
 });
