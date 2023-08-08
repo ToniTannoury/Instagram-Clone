@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
+
+//Authenticated APIS
+Route::group(["middleware" => "auth:api"], function(){
+    $user = Auth::user(); 
+    
+    // Route::group(["middleware" => "auth.admin"], function(){
+    //     Route::get("trust_issues", [AuthController::class, "issues"]);
+    // });
+
+    Route::group(["prefix" => "user"], function(){
+        Route::post("logout", [AuthController::class, "logout"]);
+        Route::post("refresh", [AuthController::class, "refresh"]);
+    });
+
+});
+
+
+Route::group(["prefix" => "guest"], function(){
+    Route::get("unauthorized", [AuthController::class, "unauthorized"])->name("unauthorized");
+    Route::post("login", [AuthController::class, "login"]);
+    Route::post("register", [AuthController::class, "register"]);
+});
+
+
