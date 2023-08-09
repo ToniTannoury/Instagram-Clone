@@ -19,10 +19,16 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post("logout", [AuthController::class, "logout"]);
         Route::post("refresh", [AuthController::class, "refresh"]);
         Route::get('following-pictures', [UserController::class,"followingPictures"]);
+        Route::get('get-profile', [UserController::class,"getProfile"]);
+        Route::get('get-followings', [UserController::class,"getFollowing"]);
+        Route::get('get-followers', [UserController::class,"getFollowers"]);
+        Route::get('get-posts', [UserController::class,"getPosts"]);
         Route::get('search-users',[UserController::class,"searchUsers"]);
         Route::post('follow-user/{user}', [UserController::class,"followUser"]);
         Route::delete('unfollow-user/{user}', [UserController::class,"unfollowUser"]);
         Route::post('create-post', [PostController::class , "createPost"]);
+        Route::post('/posts/{post}/like', [PostController::class , "like"]);
+        Route::delete('/posts/{post}/like', [PostController::class , "unlike"]);
     });
 
 });

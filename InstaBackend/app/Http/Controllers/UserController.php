@@ -21,30 +21,68 @@ class UserController extends Controller
     return response()->json(['following_pictures' => $followingPictures]);
 }
 
-    public function searchUsers(Request $request)
-    {
-        $query = $request->input('query');
+public function searchUsers(Request $request)
+{
+    $query = $request->input('query');
 
-        $users = User::where('name', 'LIKE', "%$query%")
-            ->orWhere('username', 'LIKE', "%$query%")
-            ->get();
-
-        return response()->json(['users' => $users]);
+    if (empty($query)) {
+        return response()->json(['users' => []]); // Return an empty array
     }
 
-    public function followUser(Request $request, User $user)
-    {
-        $currentUser = $request->user();
-        $currentUser->following()->syncWithoutDetaching($user);
+    $users = User::where('name', 'LIKE', "%$query%")
+        ->orWhere('username', 'LIKE', "%$query%")
+        ->get();
 
-        return response()->json(['message' => 'User followed successfully']);
+    return response()->json(['users' => $users]);
+}
+
+
+
+public function followUser(Request $request, User $user)
+{
+    $currentUser = $request->user();
+
+    
+    if ($currentUser->following->contains($user)) {
+        return response()->json(['error' => 'User is already followed'], 400);
     }
+
+    $currentUser->following()->syncWithoutDetaching($user);
+
+    return response()->json(['message' => 'User followed successfully', "user" => $user]);
+}
+
 
     public function unfollowUser(Request $request, User $user)
     {
         $currentUser = $request->user();
         $currentUser->following()->detach($user);
 
-        return response()->json(['message' => 'User unfollowed successfully']);
+        return response()->json(['message' => 'User unfollowed successfully' , "user"=>$user]);
+    }
+
+    public function getProfile(Request $request)
+    {
+        $currentUser = $request->user();
+
+        return response()->json(['user' =>  $currentUser]);
+    }
+    public function getFollowers(Request $request)
+    {
+        $followers = $request->user()->followers;
+
+        return response()->json(['followers' =>  $followers]);
+    }
+    public function getFollowing(Request $request)
+    {
+        $followings = $request->user()->following;
+
+        return response()->json(['followings' =>  $followings]);
+    }
+    public function getPosts(Request $request)
+    {
+        $followings = $request->user()->posts;
+
+        return response()->json(['posts' =>  $followings]);
     }
 }

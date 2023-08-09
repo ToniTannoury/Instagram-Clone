@@ -23,6 +23,7 @@ class AuthController extends Controller{
         ], 200);
     }
     public function login(Request $request){
+        error_log($request->email);
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
@@ -55,13 +56,30 @@ class AuthController extends Controller{
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
-
+        if ($request->hasFile('pic_url')) {
+            error_log(112); 
+            $uploadedFile = $request->file('pic_url');
+            $name = $uploadedFile->getClientOriginalName();
+            $uploadedFile->move(public_path('images'), $name);
+            $user = new User; 
+            $user->name = $request->name;
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->pic_url =$name;
+            $user->save();
+            
+            return response()->json([
+                'message' => 'User created successfully',
+                'data' => $user,
+            ], 201);
+        }
         $user = new User; 
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->pic_url = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+        $user->pic_url = "emptyProfile.png";
         $user->save();
 
         $token = Auth::login($user);
