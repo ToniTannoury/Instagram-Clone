@@ -4,7 +4,6 @@ import "../styles/UserSearchItem.css";
 
 const UserSearchItem = ({ user, debouncedSearchVal }) => {
   const { userState, userDispatch } = useContext(UserContext);
-
   const isUserFollowed = userState.following.some(followedUser => followedUser.id === user.id);
 
   const handleFollowButton = async () => {
@@ -19,7 +18,6 @@ const UserSearchItem = ({ user, debouncedSearchVal }) => {
     });
 
     const data = await response.json();
-    console.log(data);
 
     if (!data.error) {
       userDispatch({ type: 'ADD_FOLLOWING', payload: data.user });
@@ -36,7 +34,6 @@ const UserSearchItem = ({ user, debouncedSearchVal }) => {
     });
 
     const data = await response.json();
-    console.log(data);
 
     if (!data.error) {
       userDispatch({ type: 'REMOVE_FOLLOWING', payload: data.user });

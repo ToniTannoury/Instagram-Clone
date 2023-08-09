@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
 
 class UserController extends Controller
 {
@@ -19,6 +20,19 @@ class UserController extends Controller
         ->get();
 
     return response()->json(['following_pictures' => $followingPictures]);
+}
+public function followingPosts(Request $request)
+{
+    $user = $request->user();
+
+    $followingIds = $user->following->pluck('id');
+
+    $followingPosts = Post::whereIn('user_id', $followingIds)
+        ->with('user') 
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return response()->json(['following_posts' => $followingPosts]);
 }
 
 public function searchUsers(Request $request)

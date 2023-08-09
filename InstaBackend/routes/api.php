@@ -18,6 +18,7 @@ Route::group(["middleware" => "auth:api"], function(){
     Route::group(["prefix" => "user"], function(){
         Route::post("logout", [AuthController::class, "logout"]);
         Route::post("refresh", [AuthController::class, "refresh"]);
+        Route::get('following-posts', [UserController::class, "followingPosts"]);
         Route::get('following-pictures', [UserController::class,"followingPictures"]);
         Route::get('get-profile', [UserController::class,"getProfile"]);
         Route::get('get-followings', [UserController::class,"getFollowing"]);

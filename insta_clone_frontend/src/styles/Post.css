@@ -1,0 +1,105 @@
+/* .post {
+  background-color: white;
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  margin: 10px;
+  max-width: 600px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.post-owner-pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-username {
+  font-weight: bold;
+}
+
+.post-image-container {
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.post-image {
+  width: 100%;
+  height: auto;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.like-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.heart-icon {
+  font-size: 24px;
+  margin-right: 5px;
+  transition: color 0.2s ease-in-out;
+}
+
+.liked .heart-icon {
+  color: red;
+}
+
+.like-count {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.post-caption {
+  padding: 10px;
+} */
+
+.post {
+  border: 1px solid #ccc;
+  margin: 20px auto;
+  max-width: 600px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.post-image img {
+  width: 100%;
+}
+
+.post-likes {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.post-description {
+  padding: 10px;
+}

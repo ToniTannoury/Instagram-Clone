@@ -4,13 +4,15 @@ import UserContext from '../context/UserContext'
 import '../styles/LandingPage.css'
 import PofileInfoBar from './PofileInfoBar'
 import Navbar from './Navbar';
-
+import Carousel from './Carousel'
+import Post from './Post'
 const LandingPage = () => {
   const [user , setUser] = useState('')
   const {userState , userDispatch}  = useContext(UserContext)
   console.log(userState)
   useEffect(()=>{
     setUser(getUser())
+    getPosts()
   },[])
  
   const getUser = async()=>{
@@ -25,6 +27,18 @@ const LandingPage = () => {
     
     const data = await response.json()
     setUser(data.user)
+  }
+  const getPosts = async()=>{
+    const response = await fetch('http://127.0.0.1:8000/api/user/following-posts', {
+      method:"GET",
+      headers:{
+        "Accept":"application/json",
+        "Authorization":`Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    const data = await response.json()
+    console.log('posts',data)
+    userDispatch({ type: 'SET_POSTS', payload: data.following_posts})
   }
   
   return (
@@ -48,7 +62,13 @@ const LandingPage = () => {
       <div className='right-container'>
       <div className='right-side'>
         <Navbar/>
-        wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+        
+        <Carousel followings={userState.following}/>
+        {userState.posts.map((post)=>
+          
+          <Post post={post}/>
+        )}
+        
       </div>
      
       </div>

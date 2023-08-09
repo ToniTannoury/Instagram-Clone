@@ -18,7 +18,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const user = await LoginUser(formData.email , formData.password);
-    console.log("user", user);
   };
 
   const LoginUser = async ( email , password) => {
@@ -39,7 +38,6 @@ const Login = () => {
     const data = await response.json()
     if(!data.errors){
       localStorage.setItem('token' , data.data.token)
-      console.log(data)
       navigate('/LandingPage')
       return data
     }else{

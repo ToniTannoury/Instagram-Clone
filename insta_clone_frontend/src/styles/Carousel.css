@@ -1,0 +1,45 @@
+.carousel {
+  display: flex;
+  overflow-x: scroll;
+  /* scroll-snap-type: x mandatory; */
+  cursor: grab;
+  width: 200px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.carousel::-webkit-scrollbar {
+  width: 0.5rem; 
+  height: 0.5rem; 
+}
+
+.student-image {
+  flex: 0 0 60px;
+  height: 60px;
+  width: 60px;
+}
+
+.carousel:active {
+  cursor: grabbing;
+}
+.student-image {
+  width: 60px;
+  height: 60px;
+  background-color: #3498db;
+  border-radius: 50%;
+  margin-right: 10px;
+
+  border: 2px solid  ghostwhite; 
+}
+.profile-pic-image-carousel {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+}
+
+.carousel-heading{
+  margin-top: 10px;
+  margin-left: 25px;
+
+}

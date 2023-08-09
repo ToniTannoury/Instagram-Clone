@@ -1,5 +1,5 @@
 .user-search-item{
-  width: 30%;
+  width: 100%;
   background-color: ghostwhite;
   height: 80px;
   margin-top:10px ;
@@ -7,8 +7,13 @@
   border-radius: 25px;
   display: flex;
   gap:30px;
-  z-index: 5;
-  position: absolute; /* Takes the element out of the normal flow */
+  z-index: 5
+
+  
+  
+}
+.search-container{
+  position: absolute;
 }
 
 .search-profile-image {
@@ -18,7 +23,7 @@
   border-radius: 50%;
   margin-right: -10px;
   z-index: 0;
-  position: relative; /* Add position relative */
+  position: relative; 
   top: 15px;
   left: 15px;
   margin-bottom:16px;
@@ -53,7 +58,7 @@
 }
 
 .search-profile-image::before {
-  border: 30px solid  #e1306c; /* First border color */
+  border: 30px solid  #e1306c; 
   position: absolute;
   top: -6px;
   left: -6px;

@@ -6,6 +6,7 @@ const initialUserState = {
   following:[],
   followers:[],
   posts:[],
+  userposts:[],
   usersSearchResults: [], 
 };
 

@@ -11,7 +11,6 @@ const Navbar = () => {
   const [inputValue, setInputValue] = useState('');
   const debouncedSearchValue = useDebounce(inputValue, 700);
   const { userState , userDispatch } = useContext(UserContext);
-  console.log(userState)
   useEffect(() => {
    
     const searchForUser = async()=>{
@@ -50,7 +49,10 @@ const Navbar = () => {
       
 
     </div>
-      {debouncedSearchValue && userState.usersSearchResults.map(user=><UserSearchItem user={user} debouncedSearchVal={debouncedSearchValue}/>)}   
+    <div className='search-container'>
+    {debouncedSearchValue && userState.usersSearchResults.map(user=><UserSearchItem user={user} debouncedSearchVal={debouncedSearchValue}/>)} 
+    </div>
+       
     </>
   );
 }
