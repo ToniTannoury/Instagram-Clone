@@ -39,6 +39,13 @@
   transform: translateY(-50%);
   color: #aaa;
 }
+.clear-icon {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+  color: #aaa;
+}
 
 .navbar-right {
   display: flex;
@@ -81,4 +88,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.navbar-icon {
+ color: #f37e30
 }

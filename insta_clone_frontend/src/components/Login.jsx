@@ -85,7 +85,7 @@ const Login = () => {
             <hr className="line" />
           </div>
           <p>
-            Don't have an account?<Link to={"/Register"}>Register</Link>
+            Don't have an account?<Link to={"/"}>Register</Link>
           </p>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
 import Modal from "react-modal";
-import { FaSearch, FaBell, FaEnvelope } from "react-icons/fa";
+import { FaSearch, FaBell, FaEnvelope, FaTimes } from "react-icons/fa";
 import "../styles/Navbar.css";
 import useDebounce from "../customHooks/useDebounce";
 import UserContext from "../context/UserContext";
@@ -79,6 +79,11 @@ const Navbar = () => {
     }
   };
 
+  const handleClearInput = () => {
+    setInputValue("");
+  };
+
+
   return (
     <>
       <div className="navbar">
@@ -90,12 +95,15 @@ const Navbar = () => {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
+            {inputValue && (
+              <FaTimes className="clear-icon" onClick={handleClearInput} />
+            )}
             <FaSearch className="search-icon" />
           </div>
         </div>
         <div className="navbar-right">
-          <FaBell className="navbar-icon" />
-          <FaEnvelope className="navbar-icon" />
+        <FaBell className={`navbar-icon`} />
+          <FaEnvelope className={`navbar-icon`} />
           <button
             onClick={() => setModalIsOpen(true)}
             className="add-photo-button"
