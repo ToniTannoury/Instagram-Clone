@@ -64,10 +64,13 @@ const LandingPage = () => {
         <Navbar/>
         
         <Carousel followings={userState.following}/>
+        <div className='posts-container'>
         {userState.posts.map((post)=>
           
           <Post post={post}/>
         )}
+        </div>
+        
         
       </div>
      

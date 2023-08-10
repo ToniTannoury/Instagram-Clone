@@ -69,7 +69,7 @@
 .post {
   border: 1px solid #ccc;
   margin: 20px auto;
-  max-width: 600px;
+  width: 260px;
   background-color: white;
   border-radius: 5px;
 }
@@ -93,13 +93,33 @@
 
 .post-image img {
   width: 100%;
+  height: 200px;
 }
 
 .post-likes {
   padding: 10px;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 .post-description {
   padding: 10px;
+}
+.like-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.heart-icon {
+  font-size: 18px; /* Adjust the font size as needed */
+  margin-right: 5px;
+  transition: color 0.2s ease-in-out;
+}
+
+.liked .heart-icon {
+  color: red;
+  font-size: 18px; 
 }

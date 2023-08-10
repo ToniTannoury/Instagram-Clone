@@ -1,55 +1,63 @@
-// import React, { useState } from 'react';
-// import '../styles/Post.css';
-
-// const Post = ({ post }) => {
-//   const [liked, setLiked] = useState(false);
-//   console.log(post)
-//   const handleLike = () => {
-//     setLiked(!liked);
-//   };
-
-//   return (
-//     <div className='post'>
-//       <div className='post-header'>
-//         <img className='post-profile-pic' src={`http://127.0.0.1:8000/images/${post.image_url}`} alt='Profile' />
-//         <span className='post-username'>{post.username}</span>
-//       </div>
-//       <img className='post-image' src={post.imageUrl} alt='Post' />
-//       <div className='post-actions'>
-//         <button className={`like-button ${liked ? 'liked' : ''}`} onClick={handleLike}>
-//           <span className='heart-icon'>{liked ? '❤️' : '♡'}</span>
-//         </button>
-//       </div>
-//       <div className='post-caption'>
-//         <span className='post-likes'>{post.likes} likes</span>
-//         <span className='post-text'>{post.caption}</span>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Post;
-import React from 'react';
-import '../styles/Post.css'; // Create this CSS file to style your Post component
+import React, { useState, useEffect } from 'react';
+import '../styles/Post.css';
+import { FaHeart } from 'react-icons/fa';
 
 const Post = ({ post }) => {
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(post.likes);
+
+  useEffect(() => {
+    // Check if the user has liked the post and update the state
+    const checkLiked = async()=>{
+      const response = await fetch(`http://127.0.0.1:8000/api/user/posts/${post.id}/liked`, {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      const data = await response.json()
+      console.log(data)
+      setLiked(data.liked);
+    }
+    checkLiked()
+  },[]);
+
+  const handleLike = async () => {
+    if (liked) {
+      setLikeCount(likeCount - 1);
+    } else {
+      const response = await fetch(`http://127.0.0.1:8000/api/user/posts/${post.id}/like`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      const data = await response.json();
+      console.log(data, 1);
+      setLikeCount(likeCount + 1);
+    }
+    setLiked(!liked);
+  };
+
   return (
     <div className="post">
       <div className="post-header">
-        <img
-          className="user-avatar"
-          src={`http://127.0.0.1:8000/images/${post.user.pic_url}`}
-          alt="User Avatar"
-        />
+        <img className="user-avatar" src={`http://127.0.0.1:8000/images/${post.user.pic_url}`} alt="User Avatar" />
         <span className="username">example_user</span>
       </div>
       <div className="post-image">
-        <img src={`http://127.0.0.1:8000/images/${post.image_url}`} />
+        <img src={`http://127.0.0.1:8000/images/${post.image_url}`} alt="Post" />
       </div>
-      <div className="post-likes">Likes: 1000</div>
-      <div className="post-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod
-        aliquam enim non bibendum.
+      <div className="post-likes">
+        <button className={`like-button ${liked ? 'liked' : ''}`} onClick={handleLike}>
+          <span className={`heart-icon ${liked ? 'red-heart' : ''}`}>
+            <FaHeart />
+          </span>
+        </button>
+        {` ${likeCount} likes`}
       </div>
     </div>
   );

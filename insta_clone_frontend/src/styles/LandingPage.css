@@ -88,3 +88,6 @@ display: flex;
 .right-container{
   width: 100%;
 }
+.posts-container{
+  display: flex;
+}
