@@ -79,7 +79,7 @@ const Login = () => {
             onChange={handleChange}
           />
           <button type="submit">Sign In</button>
-          <div className="text-with-lines">
+          <div className="text-with-lines login">
             <hr className="line" />
             <p className="text">OR</p>
             <hr className="line" />

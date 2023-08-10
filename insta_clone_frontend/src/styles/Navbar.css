@@ -61,7 +61,7 @@
 .add-photo-button {
   padding: 8px 16px;
   border: none;
-  border-radius: 20px;
+  border-radius: 6px;
   background: linear-gradient(45deg, #ff9900, #ff6600, #ff3300);
   color: white;
   font-weight: bold;

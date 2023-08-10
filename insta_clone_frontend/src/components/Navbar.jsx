@@ -43,7 +43,7 @@ const Navbar = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(selectedPicture)
     if (!selectedPicture) {
       console.log("No image selected");
       return;
@@ -77,6 +77,7 @@ const Navbar = () => {
     } catch (error) {
       console.error("An error occurred:", error);
     }
+    setSelectedPicture(null)
   };
 
   const handleClearInput = () => {

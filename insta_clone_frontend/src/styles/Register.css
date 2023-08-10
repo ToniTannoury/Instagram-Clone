@@ -82,7 +82,13 @@ hr{
 .text-with-lines {
   display: flex;
   align-items: center;
-  
+  width: 200px;
+}
+.text-with-lines.login {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  margin-left: 60px;
 }
 
 .line {
@@ -96,3 +102,45 @@ hr{
   font-size: 13px;
   padding: 10px;
 }
+
+
+@media screen and (max-width: 1600px) {
+  .register-container {
+    min-height: 100vh; 
+  }
+
+  .register-form {
+    padding: 1rem; 
+    border-radius: 6px; 
+    max-width: 320px; 
+    width: 80%; 
+  }
+
+  .register-form h1 {
+    font-size: 20px; 
+    margin-bottom: 0.7rem; 
+  }
+
+  .register-form input {
+    width:50%; 
+    padding: 0.4rem; 
+    margin: 0.15rem 0; 
+    font-size: 12px; 
+  }
+
+  .register-form button {
+    width: 80%; 
+    padding: 0.4rem; 
+    margin-top: 0.7rem; 
+    margin-bottom: 0.7rem; 
+    font-size: 12px; 
+  }
+
+  .register-form p {
+    margin-top: 0.7rem; 
+    font-size: 12px; 
+  }
+
+  
+}
+
