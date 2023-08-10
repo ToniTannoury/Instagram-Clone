@@ -18,7 +18,8 @@ const Carousel = ({ followings }) => {
   const handleDragMove = (e) => {
     if (!isDragging) return;
     const offsetX = e.clientX - startX;
-    carouselRef.current.scrollLeft = scrollLeft - offsetX;
+    const newScrollLeft = scrollLeft - offsetX;
+    carouselRef.current.scrollLeft = newScrollLeft;
   };
 
   const handleDragEnd = () => {
@@ -48,7 +49,7 @@ const Carousel = ({ followings }) => {
         onMouseUp={handleDragEnd}
         style={{ display: "flex", overflowX: "scroll" }}
       >
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", gap: "40px", textAlign: "center" }}>
           {followings.map((student) => (
             <div
               key={student.id}
@@ -57,10 +58,15 @@ const Carousel = ({ followings }) => {
                 flex: "0 0 auto",
               }}
             >
-              <img
-                className="profile-pic-image-carousel"
-                src={`http://127.0.0.1:8000/images/${student.pic_url}`}
-              />
+              <div className="student-wrapper">
+                <div className="profile-pic-image-carousel">
+                  <img
+                    className="profile-pic-image-car"
+                    src={`http://127.0.0.1:8000/images/${student.pic_url}`}
+                  />
+                </div>
+                <p className="student-username">{student.username}</p>
+              </div>
             </div>
           ))}
         </div>
