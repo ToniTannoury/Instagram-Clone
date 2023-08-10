@@ -14,7 +14,7 @@ const LandingPage = () => {
   const [user, setUser] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const { userState, userDispatch } = useContext(UserContext);
-
+  console.log(userState)
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/Login");
@@ -37,6 +37,7 @@ const LandingPage = () => {
     });
 
     const data = await response.json();
+    console.log(data)
     setUser(data.user);
   };
   const getPosts = async () => {
@@ -51,7 +52,7 @@ const LandingPage = () => {
       },
     );
     const data = await response.json();
-    userDispatch({ type: "SET_POSTS", payload: data.following_posts });
+      userDispatch({ type: "SET_POSTS", payload: data.following_posts });
   };
   const getUserPosts = async () => {
     const response = await fetch("http://127.0.0.1:8000/api/user/get-posts", {
@@ -62,8 +63,12 @@ const LandingPage = () => {
       },
     });
     const data = await response.json();
-    console.log("posts", data);
-    userDispatch({ type: "SET_USER_POSTS", payload: data.posts });
+    console.log(1111111)
+    console.log(data)
+    if(data.posts.length!==0){
+      userDispatch({ type: "SET_USER_POSTS", payload: data.posts });
+
+    }
   };
 
   return (

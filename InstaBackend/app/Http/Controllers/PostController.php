@@ -86,35 +86,36 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     public function createPost(Request $request)
-    {
-        $user = $request->user();
-    
-        if ($request->hasFile('image_url')) {
-            try {
-                $uploadedFile = $request->file('image_url');
-                $name = $uploadedFile->getClientOriginalName();
-                $uploadedFile->move(public_path('images'), $name);
-                
-                $post = new Post([
-                    'user_id' => $user->id,
-                    'image_url' => $name,
-                    'likes' => 0,
-                ]);
-                
-                $user->posts()->save($post);
-    
-                return response()->json([
-                    'message' => 'Post created successfully',
+{
+    $user = $request->user();
+
+    if ($request->hasFile('image_url')) {
+        try {
+            $uploadedFile = $request->file('image_url');
+            $name = $uploadedFile->getClientOriginalName();
+            $uploadedFile->move(public_path('images'), $name);
+
+            $post = new Post([
+                'user_id' => $user->id,
+                'image_url' => $name,
+                'likes' => 0,
+            ]);
+
+            $user->posts()->save($post);
+
+            return response()->json([
+                'message' => 'Post created successfully',
                     'data' => $post,
-                ], 201);
-            } catch (Exception $e) {
-                error_log('Exception: ' . $e->getMessage());
-                return response()->json(['message' => 'Error creating post'], 500);
-            }
+            ], 201);
+        } catch (Exception $e) {
+            error_log('Exception: ' . $e->getMessage());
+            return response()->json(['message' => 'Error creating post'], 500);
         }
-        
-        return response()->json(['message' => 'Post not created']);
     }
+
+    return response()->json(['message' => 'Post not created']);
+}
+
     public function like(Post $post)
     {
         $user = Auth::user();

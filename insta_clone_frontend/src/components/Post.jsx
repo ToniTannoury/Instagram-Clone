@@ -3,11 +3,10 @@ import "../styles/Post.css";
 import { FaHeart } from "react-icons/fa";
 
 const Post = ({ post }) => {
+  console.log(post)
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(post.likes);
-  console.log(11111111111111111111111111111111111111111, post);
   useEffect(() => {
-    // Check if the user has liked the post and update the state
     const checkLiked = async () => {
       const response = await fetch(
         `http://127.0.0.1:8000/api/user/posts/${post.id}/liked`,

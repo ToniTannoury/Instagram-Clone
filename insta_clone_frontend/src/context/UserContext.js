@@ -18,6 +18,9 @@ const userReducer = (state, action) => {
       return { ...state, posts: action.payload };
     case "SET_USER_POSTS":
       console.log(action.payload)
+      if(action.payload.length==0){
+        return { ...state, userposts: action.payload }
+      }
       if(action.payload.length>1){
         return { ...state, userposts: action.payload }
       }

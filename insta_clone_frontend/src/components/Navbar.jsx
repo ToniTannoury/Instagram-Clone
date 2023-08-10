@@ -34,6 +34,8 @@ const Navbar = () => {
     };
     searchForUser();
   }, [debouncedSearchValue]);
+
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setSelectedPicture(selectedFile);
@@ -63,10 +65,12 @@ const Navbar = () => {
         },
       );
       const data = await response.json();
+      console.log(data)
       if (response.ok) {
-        console.log(data);
         setModalIsOpen(false);
+        console.log(1111111111)
         userDispatch({ type: "SET_USER_POSTS", payload: data.data });
+        // userDispatch({ type: "SET_POSTS", payload:data.data });
       } else {
         console.log("Error creating post");
       }

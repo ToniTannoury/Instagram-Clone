@@ -10,6 +10,7 @@ const PofileInfoBar = () => {
 
   const { userState, userDispatch } = useContext(UserContext);
   useEffect(() => {
+    console.log(userState)
     async function fetchProfileInfo() {
       try {
         const followersData = await getFollowers();
@@ -37,7 +38,6 @@ const PofileInfoBar = () => {
 
     const data = await response.json();
     userDispatch({ type: "SET_FOLLOWERS", payload: data.followers });
-    console.log(data);
     return data;
   };
 
@@ -72,7 +72,7 @@ const PofileInfoBar = () => {
 
   //   const data = await response.json();
   //   if(!data.error){
-  //     userDispatch({ type: 'SET_POSTS', payload: data.posts})
+  //     userDispatch({ type: 'z', payload: data.posts})
   //   }
 
   //   return data;
