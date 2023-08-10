@@ -63,6 +63,14 @@ const UserSearchItem = ({ user, debouncedSearchVal }) => {
           alt={user.name}
         />
       </div>
+      <div>
+        <p className="search-item-text-name">
+          {user.name}
+        </p>
+        <p className="search-item-text">
+          {user.username}
+        </p>
+      </div>
       <button
         onClick={handleFollowUnfollowButtonClick}
         className="follow-button"

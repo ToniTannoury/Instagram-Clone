@@ -68,6 +68,20 @@
 }
 
 .follow-button{
-  height: 20px;
+  height: 30px;
   margin: auto;
+  background: linear-gradient(45deg, #f3be6f, #f37e30, #ff3300);
+  border: 1px transparent;
+  border-radius: 5px;
+  margin-right: 20px;
+  color: wheat;
+}
+.search-item-text{
+  margin-top: 3px;
+  margin-left: 16px;
+  
+}
+.search-item-text-name{
+  margin-top: 16px;
+  margin-left: 16px;
 }

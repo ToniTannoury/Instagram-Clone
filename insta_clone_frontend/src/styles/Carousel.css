@@ -21,6 +21,8 @@ padding-bottom: 20px;
   flex: 0 0 60px;
   height: 60px;
   width: 60px;
+  z-index: -50;
+
 }
 
 .carousel:active {
@@ -77,5 +79,5 @@ padding-bottom: 20px;
   left: 80px;
   transform: translateX(-50%);
   color: black;
-  z-index: 5;
+  z-index: -5;
 }
