@@ -1,45 +1,51 @@
-import React, { useContext } from 'react';
-import UserContext from '../context/UserContext';
+import React, { useContext } from "react";
+import UserContext from "../context/UserContext";
 import "../styles/UserSearchItem.css";
 
 const UserSearchItem = ({ user, debouncedSearchVal }) => {
   const { userState, userDispatch } = useContext(UserContext);
-  const isUserFollowed = userState.following.some(followedUser => followedUser.id === user.id);
+  const isUserFollowed = userState.following.some(
+    (followedUser) => followedUser.id === user.id,
+  );
 
   const handleFollowButton = async () => {
-   
-
-    const response = await fetch(`http://127.0.0.1:8000/api/user/follow-user/${user.id}`, {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-      }
-    });
+    const response = await fetch(
+      `http://127.0.0.1:8000/api/user/follow-user/${user.id}`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      },
+    );
 
     const data = await response.json();
 
     if (!data.error) {
-      userDispatch({ type: 'ADD_FOLLOWING', payload: data.user });
+      userDispatch({ type: "ADD_FOLLOWING", payload: data.user });
       return data;
     }
-  }
+  };
   const handleUnfollowButton = async () => {
-    const response = await fetch(`http://127.0.0.1:8000/api/user/unfollow-user/${user.id}`, {
-      method: "DELETE",
-      headers: {
-        "Accept": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-      }
-    });
+    const response = await fetch(
+      `http://127.0.0.1:8000/api/user/unfollow-user/${user.id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      },
+    );
 
     const data = await response.json();
 
     if (!data.error) {
-      userDispatch({ type: 'REMOVE_FOLLOWING', payload: data.user });
+      userDispatch({ type: "REMOVE_FOLLOWING", payload: data.user });
       return data;
     }
-  }
+  };
 
   const handleFollowUnfollowButtonClick = () => {
     if (isUserFollowed) {
@@ -47,17 +53,24 @@ const UserSearchItem = ({ user, debouncedSearchVal }) => {
     } else {
       handleFollowButton();
     }
-  }
+  };
   return (
-    <div id={`${user.id}`} className='user-search-item'>
+    <div id={`${user.id}`} className="user-search-item">
       <div className="search-profile-image">
-        <img className="profile-pic-image-search" src={`http://127.0.0.1:8000/images/${user.pic_url}`} alt={user.name} />
+        <img
+          className="profile-pic-image-search"
+          src={`http://127.0.0.1:8000/images/${user.pic_url}`}
+          alt={user.name}
+        />
       </div>
-      <button onClick={handleFollowUnfollowButtonClick} className='follow-button'>
+      <button
+        onClick={handleFollowUnfollowButtonClick}
+        className="follow-button"
+      >
         {isUserFollowed ? "Unfollow" : "Follow"}
       </button>
     </div>
-  )
-}
+  );
+};
 
 export default UserSearchItem;

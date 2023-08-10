@@ -1,6 +1,7 @@
 body {
   display: block;
   margin: 0px;
+  font-family: 'Apple Chancery', cursive;
 }
 .landing-page{
 display: flex;
@@ -72,7 +73,8 @@ display: flex;
 }
 
 .profile-image::before {
-  border: 48px solid  #e1306c; /* First border color */
+  /* border: 48px solid  #e1306c;  */
+  border: 48px solid  #f37e30; /* First border color */
   position: absolute;
   top: -8px;
   left: -8px;
@@ -92,4 +94,55 @@ display: flex;
   display: flex;
   flex-wrap: wrap;
   gap:16px
+}
+
+.logout-button{
+  font-weight: 700;
+  color: wheat;
+  margin-left: 30%;
+  margin-top: 15px;
+  width:100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background: linear-gradient(45deg, #f3be6f, #f37e30, #ff3300);
+  
+}
+.modal-submit{
+  font-weight: 700;
+  color: wheat;
+  margin-right: 10px;
+  margin-top: 15px;
+  width:100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background: linear-gradient(45deg, #f3be6f, #f37e30, #ff3300);
+  cursor: pointer;
+}
+.modal-close{
+  font-weight: 700;
+  color: wheat;
+  margin-right: 10px;
+  margin-top: 15px;
+  width:100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  background: linear-gradient(45deg, #f3be6f, #f37e30, #ff3300);
+  cursor: pointer;
+}
+.logout-button:hover{
+  border: 1px solid transparent;
+  background: linear-gradient(45deg, #f3be6f, #f37e30, #ff3300);
+  cursor: pointer;
+}
+
+.logout-icon{
+  margin-right: 6px;
+  position: relative;
+  top: 1.25px;
+}
+.logout-button:hover .logout-icon {
+  margin-right: 10px; /* Adjust the margin as desired */
 }
