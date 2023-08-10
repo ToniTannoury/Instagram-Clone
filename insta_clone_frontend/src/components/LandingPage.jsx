@@ -9,10 +9,10 @@ import Post from './Post'
 const LandingPage = () => {
   const [user , setUser] = useState('')
   const {userState , userDispatch}  = useContext(UserContext)
-  console.log(userState)
   useEffect(()=>{
     setUser(getUser())
     getPosts()
+    getUserPosts()
   },[])
  
   const getUser = async()=>{
@@ -37,8 +37,19 @@ const LandingPage = () => {
       }
     })
     const data = await response.json()
-    console.log('posts',data)
     userDispatch({ type: 'SET_POSTS', payload: data.following_posts})
+  }
+  const getUserPosts = async()=>{
+    const response = await fetch('http://127.0.0.1:8000/api/user/get-posts', {
+      method:"GET",
+      headers:{
+        "Accept":"application/json",
+        "Authorization":`Bearer ${localStorage.getItem("token")}`
+      }
+    })
+    const data = await response.json()
+    console.log('posts',data)
+    userDispatch({ type: 'SET_USER_POSTS', payload: data.posts})
   }
   
   return (

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState , useEffect , useContext } from 'react';
-import { FaSearch, FaBell, FaEnvelope } from 'react-icons/fa'; // Import the icons
+import Modal from 'react-modal';
+import { FaSearch, FaBell, FaEnvelope } from 'react-icons/fa';
 import '../styles/Navbar.css';
 import useDebounce from '../customHooks/useDebounce'
 import UserContext from '../context/UserContext';
@@ -10,7 +11,10 @@ import UserSearchItem from './UserSearchItem';
 const Navbar = () => {
   const [inputValue, setInputValue] = useState('');
   const debouncedSearchValue = useDebounce(inputValue, 700);
-  const { userState , userDispatch } = useContext(UserContext);
+  const { userState, userDispatch } = useContext(UserContext);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedPicture, setSelectedPicture] = useState(null);
+
   useEffect(() => {
    
     const searchForUser = async()=>{
@@ -31,6 +35,44 @@ const Navbar = () => {
         
  
   }, [debouncedSearchValue]);
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setSelectedPicture(selectedFile);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!selectedPicture) {
+      console.log('No image selected');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image_url', selectedPicture);
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/user/create-post', {
+        method: 'POST',
+        headers: {
+          "Accept": 'application/json',
+          "Authorization": `Bearer ${localStorage.getItem('token')}`,
+        },
+        body: formData,
+      });
+const data = await response.json()
+      if (response.ok) {
+        console.log(data)
+        setModalIsOpen(false);
+        userDispatch({ type: 'SET_USER_POSTS', payload: data.data });
+      } else {
+        console.log('Error creating post');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
+
   return (
     <>
     <div className="navbar">
@@ -44,10 +86,27 @@ const Navbar = () => {
       <div className="navbar-right">
         <FaBell className="navbar-icon" />
         <FaEnvelope className="navbar-icon" />
-        <button className="add-photo-button">Add Photo</button>
+        <button onClick={() => setModalIsOpen(true)} className="add-photo-button">Add Photo</button>
       </div>
       
-
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        contentLabel="Add Photo Modal"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        <h2>Add Photo</h2>
+        <form onSubmit={handleSubmit} encType="multipart/form-data" className="register-form-container">
+          <input
+            type="file"
+            name="profilePicture"
+            onChange={handleFileChange}
+          />
+          <button type="submit">Submit</button>
+          <button onClick={() => setModalIsOpen(false)}>Close</button>
+        </form>
+      </Modal>
     </div>
     <div className='search-container'>
     {debouncedSearchValue && userState.usersSearchResults.map(user=><UserSearchItem user={user} debouncedSearchVal={debouncedSearchValue}/>)} 

@@ -28,8 +28,9 @@ Route::group(["middleware" => "auth:api"], function(){
         Route::post('follow-user/{user}', [UserController::class,"followUser"]);
         Route::delete('unfollow-user/{user}', [UserController::class,"unfollowUser"]);
         Route::post('create-post', [PostController::class , "createPost"]);
-        Route::post('/posts/{post}/like', [PostController::class , "like"]);
-        Route::delete('/posts/{post}/like', [PostController::class , "unlike"]);
+        Route::post('posts/{post}/like', [PostController::class , "like"]);
+        Route::post('posts/{post}/unlike', [PostController::class , "unlike"]);
+        Route::get('posts/{post}/liked', [PostController::class , "checkLiked"]);
     });
 
 });

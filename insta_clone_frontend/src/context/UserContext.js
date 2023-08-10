@@ -16,6 +16,12 @@ const userReducer = (state, action) => {
       return { ...state, user: action.payload };
     case "SET_POSTS":
       return { ...state, posts: action.payload };
+    case "SET_USER_POSTS":
+      console.log(action.payload)
+      if(action.payload.length>1){
+        return { ...state, userposts: action.payload }
+      }
+      return { ...state, userposts: [...state.userposts, action.payload] };
     case "SET_FOLLOWING":
       console.log(action.payload)
       return { ...state, following: action.payload };
