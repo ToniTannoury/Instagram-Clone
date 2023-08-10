@@ -70,7 +70,6 @@ const Navbar = () => {
         setModalIsOpen(false);
         console.log(1111111111)
         userDispatch({ type: "SET_USER_POSTS", payload: data.data });
-        // userDispatch({ type: "SET_POSTS", payload:data.data });
       } else {
         console.log("Error creating post");
       }

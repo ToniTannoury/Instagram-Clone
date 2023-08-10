@@ -46,7 +46,7 @@
 }
 
 .heart-icon {
-  font-size: 18px; /* Adjust the font size as needed */
+  font-size: 18px;
   margin-right: 5px;
   transition: color 0.2s ease-in-out;
 }

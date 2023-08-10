@@ -60,7 +60,7 @@ const Register = () => {
         throw new Error("Error Registeering");
       }
     } catch (error) {
-      // Error handling
+      console.log(error)
     }
   };
 

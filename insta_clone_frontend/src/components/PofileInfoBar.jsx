@@ -15,7 +15,6 @@ const PofileInfoBar = () => {
       try {
         const followersData = await getFollowers();
         const followingsData = await getFollowings();
-        // const postsData = await getPosts();
       } catch (error) {
         console.error("Error fetching profile info:", error);
       }
@@ -60,24 +59,6 @@ const PofileInfoBar = () => {
 
     return data;
   };
-
-  // const getPosts = async () => {
-  //   const response = await fetch("http://127.0.0.1:8000/api/user/get-posts", {
-  //     method: "GET",
-  //     headers: {
-  //       "Accept": "application/json",
-  //       "Authorization": `Bearer ${localStorage.getItem("token")}`
-  //     }
-  //   });
-
-  //   const data = await response.json();
-  //   if(!data.error){
-  //     userDispatch({ type: 'z', payload: data.posts})
-  //   }
-
-  //   return data;
-
-  // }
 
   return (
     <div>
