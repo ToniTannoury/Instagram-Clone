@@ -74,7 +74,9 @@
   border: 1px transparent;
   border-radius: 5px;
   margin-right: 20px;
+  min-width: 70px;
   color: wheat;
+  cursor: pointer;
 }
 .search-item-text{
   margin-top: 3px;

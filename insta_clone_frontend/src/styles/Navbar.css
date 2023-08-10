@@ -45,6 +45,7 @@
   right: 30px;
   transform: translateY(-50%);
   color: #aaa;
+  cursor:pointer;
 }
 
 .navbar-right {
